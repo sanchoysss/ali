@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="by.controllers.MainController"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <Canvas fx:id="canvas" width="1500" height="1000"/>
+
+    <ScrollPane>
+        <VBox prefWidth="420" style="-fx-background-color: #C0C0C0">
+            <Label text="Создание фигуры:" prefWidth="400" alignment="BASELINE_CENTER">
+                <font>
+                    <Font size="24.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="20" bottom="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Label text="a1">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="a1SideField" promptText="Введите a1:">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="h1">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="h1Field" promptText="Введите h1:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="a2">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="a2SideField" promptText="Введите a2:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="h2">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="h2Field" promptText="Введите h2:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionLabel" text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red"
+                   visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Нарисовать" prefWidth="400" alignment="BASELINE_CENTER"
+                    onAction="#drawFigure">
+                <VBox.margin>
+                    <Insets left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Label text="Геометрические преобразования" prefWidth="420" alignment="BASELINE_CENTER">
+                <VBox.margin>
+                    <Insets top="30"/>
+                </VBox.margin>
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Label>
+
+            <Label text="Перемещение:" prefWidth="420" alignment="BASELINE_CENTER">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+                <font>
+                    <Font size="18"/>
+                </font>
+            </Label>
+
+            <Label text="Перемещение по оси X:">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="moveXLabel" promptText="Введите перемещение по координате X:" text="0">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Перемещение по оси Y:">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="moveYLabel" promptText="Введите перемещение по координате Y:" text="0">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Перемещение по оси Z:">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="moveZLabel" promptText="Введите перемещение по координате Z:" text="0">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionOnMovingLabel"
+                   text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red" visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Переместить" prefWidth="400" alignment="BASELINE_CENTER"
+                    onAction="#moveFigures">
+                <VBox.margin>
+                    <Insets left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </ScrollPane>
+</HBox>

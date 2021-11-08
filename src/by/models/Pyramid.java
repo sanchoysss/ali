@@ -1,5 +1,9 @@
 package by.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Pyramid {
 
     private Edge[] triangles;
@@ -41,5 +45,11 @@ public class Pyramid {
 
     public void setTriangles(Edge[] triangles) {
         this.triangles = triangles;
+    }
+
+    public List<Edge> getEdges() {
+        List<Edge> edges = new ArrayList<>();
+        Collections.addAll(edges, triangles);
+        return edges;
     }
 }

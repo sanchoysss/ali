@@ -1,5 +1,9 @@
 package by.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Parallelepiped {
 
     private Edge[] triangles;
@@ -15,7 +19,7 @@ public class Parallelepiped {
         Edge[] rectangles = new Edge[3];
 
         triangles[0] = Triangle.createTriangle(side, 0);
-        triangles[1] = Triangle.createTriangle(side, 1);
+        triangles[1] = Triangle.createTriangle(side, height);
 
         rectangles[0] = new Edge(
                 triangles[1].getPoints()[0],
@@ -55,5 +59,12 @@ public class Parallelepiped {
 
     public void setRectangles(Edge[] rectangles) {
         this.rectangles = rectangles;
+    }
+
+    public List<Edge> getEdges() {
+        List<Edge> edges = new ArrayList<>(triangles.length + rectangles.length);
+        Collections.addAll(edges, triangles);
+        Collections.addAll(edges, rectangles);
+        return edges;
     }
 }
