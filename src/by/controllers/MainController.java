@@ -5,7 +5,6 @@ import by.models.Edge;
 import by.models.Parallelepiped;
 import by.models.Point;
 import by.models.Pyramid;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
@@ -176,15 +175,18 @@ public class MainController {
             return;
         }
         try {
+            // Достаем значения из инпутов
             double scaleX = Double.parseDouble(scaleXField.getText());
             double scaleY = Double.parseDouble(scaleYField.getText());
             double scaleZ = Double.parseDouble(scaleZField.getText());
+            //Матрица масштабирования
             double[][] matrix = {
                     {scaleX, 0,      0     , 0},
                     {0     , scaleY, 0     , 0},
                     {0     , 0     , scaleZ, 0},
                     {0     , 0     , 0     , 1}
             };
+            //масштабируем и отрисовываем
             transformAndThenDraw(matrix);
             exceptionOnScalingLabel.setVisible(false);
         } catch (NumberFormatException e) {
@@ -217,6 +219,9 @@ public class MainController {
     @FXML
     private Label exceptionOnRotatingX, exceptionOnRotatingY, exceptionOnRotatingZ;
 
+    /**
+     * Поворот относительно оси X
+     */
     public void rotateOnX() {
         if (pyramid == null || parallelepiped == null) {
             setException(exceptionOnRotatingX, "Фигуры не созданы");
@@ -224,21 +229,27 @@ public class MainController {
         }
         double angleX;
         try {
+            //берем значение угла из инпута
             angleX = toRadians(Double.parseDouble(rotateXField.getText()));
         } catch (NumberFormatException e) {
             setException(exceptionOnRotatingX, "Данные введены неверно");
             return;
         }
         exceptionOnRotatingX.setVisible(false);
+        // матрица поворота
         double[][] matrix = new double[][]{
                 {1, 0, 0, 0},
                 {0, cos(angleX), sin(angleX), 0},
                 {0, -sin(angleX), cos(angleX), 0},
                 {0, 0, 0, 1}
         };
+        // поворачиваем и отрисовываем
         transformAndThenDraw(matrix);
     }
 
+    /**
+     * поворот относительно Y
+     */
     public void rotateOnY() {
         if (pyramid == null || parallelepiped == null) {
             setException(exceptionOnRotatingY, "Фигуры не созданы");
@@ -261,6 +272,9 @@ public class MainController {
         transformAndThenDraw(matrix);
     }
 
+    /**
+     * Поворот относительно Z
+     */
     public void rotateOnZ() {
         if (pyramid == null || parallelepiped == null) {
             setException(exceptionOnRotatingZ, "Фигуры не созданы");
@@ -296,6 +310,9 @@ public class MainController {
     @FXML
     private Label exceptionOnProjectionsLabel;
 
+    /**
+     * Профильная проекция
+     */
     public void drawProfileProjection() {
         if (pyramid == null || parallelepiped == null) {
             exceptionOnProjectionsLabel.setText("Фигуры не созданы");
@@ -312,6 +329,9 @@ public class MainController {
         transformAndThenDraw(matrix);
     }
 
+    /**
+     * Горизонтальная проекция
+     */
     public void drawHorizontalProjection() {
         if (pyramid == null || parallelepiped == null) {
             exceptionOnProjectionsLabel.setText("Фигуры не созданы");
@@ -341,6 +361,9 @@ public class MainController {
     @FXML
     private Label exceptionPerspectiveLabel;
 
+    /**
+     * Перспективная проекция
+     */
     public void drawPerspectiveProjection() {
         if (parallelepiped == null || pyramid == null) {
             exceptionPerspectiveLabel.setText("Фигуры не созданы");
