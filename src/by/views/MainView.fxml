@@ -25,49 +25,49 @@
                 </VBox.margin>
             </Label>
 
-            <Label text="a1">
+            <Label text="Сторона пирамиды">
                 <VBox.margin>
                     <Insets top="10" left="20"/>
                 </VBox.margin>
             </Label>
 
-            <TextField fx:id="a1SideField" promptText="Введите a1:">
+            <TextField fx:id="a1SideField" promptText="Введите сторону пирамиды:">
                 <VBox.margin>
                     <Insets top="10" bottom="20" left="20" right="20"/>
                 </VBox.margin>
             </TextField>
 
-            <Label text="h1">
+            <Label text="Высота пирамиды">
                 <VBox.margin>
                     <Insets bottom="10" left="20"/>
                 </VBox.margin>
             </Label>
 
-            <TextField fx:id="h1Field" promptText="Введите h1:">
+            <TextField fx:id="h1Field" promptText="Введите высоту пирамиды:">
                 <VBox.margin>
                     <Insets bottom="20" left="20" right="20"/>
                 </VBox.margin>
             </TextField>
 
-            <Label text="a2">
+            <Label text="Сторона параллелепипеда">
                 <VBox.margin>
                     <Insets bottom="10" left="20"/>
                 </VBox.margin>
             </Label>
 
-            <TextField fx:id="a2SideField" promptText="Введите a2:">
+            <TextField fx:id="a2SideField" promptText="Введите сторону параллелепипеда:">
                 <VBox.margin>
                     <Insets bottom="20" left="20" right="20"/>
                 </VBox.margin>
             </TextField>
 
-            <Label text="h2">
+            <Label text="Высота параллелепипеда">
                 <VBox.margin>
                     <Insets bottom="10" left="20"/>
                 </VBox.margin>
             </Label>
 
-            <TextField fx:id="h2Field" promptText="Введите h2:">
+            <TextField fx:id="h2Field" promptText="Введите высоту параллелепипеда:">
                 <VBox.margin>
                     <Insets bottom="20" left="20" right="20"/>
                 </VBox.margin>
@@ -287,6 +287,118 @@
             </Label>
 
             <Button text="Повернуть" prefWidth="400" alignment="BASELINE_CENTER" onAction="#rotateOnZ">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Label text="Проекции:" prefWidth="420" alignment="BASELINE_CENTER">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+                <font>
+                    <Font size="20"/>
+                </font>
+            </Label>
+
+            <Label fx:id="exceptionOnProjectionsLabel" prefWidth="420"
+                   alignment="BASELINE_CENTER" visible="false" textFill="#002e80">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+
+            <Button prefWidth="380" text="Профильная проекция"
+                    alignment="BASELINE_CENTER" onAction="#drawProfileProjection">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Button prefWidth="380" text="Горизонтальная проекция"
+                    alignment="BASELINE_CENTER" onAction="#drawHorizontalProjection">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Label text="Перспективная прокеция">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Label text="Угол альфа">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="alphaField" promptText="Введите угол альфа:">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Угол фи">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="phiField" promptText="Введите угол фи:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Ро">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="roField" promptText="Введите ро:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="d">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="dField" promptText="Введите d:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionPerspectiveLabel" text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red"
+                   visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button prefWidth="380" text="Перспективная проекция"
+                    alignment="BASELINE_CENTER" onAction="#drawPerspectiveProjection">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Button prefWidth="380" text="Аксонометрическая проекция"
+                    alignment="BASELINE_CENTER" onAction="#drawAxonometricProjection">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Button prefWidth="380" text="Косоугольная проекция"
+                    alignment="BASELINE_CENTER" onAction="#drawObliqueProjection">
                 <VBox.margin>
                     <Insets top="10" left="20" right="20"/>
                 </VBox.margin>

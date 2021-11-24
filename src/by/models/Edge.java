@@ -50,4 +50,48 @@ public class Edge {
     public boolean isVisible() {
         return visible;
     }
+
+    public void updateVisibility(Point viewer) {
+//        double angle = calculateAngle(viewer);
+//        this.visible = angle <= 90;
+    }
+
+    private double calculateAngle(Point viewer) {
+        double xA, yA, zA;
+        xA = this.getPoints()[0].getY() * this.getPoints()[1].getZ() +
+                this.getPoints()[1].getY() * this.getPoints()[2].getZ() +
+                this.getPoints()[2].getY() * this.getPoints()[0].getZ() -
+                this.getPoints()[1].getY() * this.getPoints()[0].getZ() -
+                this.getPoints()[2].getY() * this.getPoints()[1].getZ() -
+                this.getPoints()[0].getY() * this.getPoints()[2].getZ();
+        yA = this.getPoints()[0].getZ() * this.getPoints()[1].getX() +
+                this.getPoints()[1].getZ() * this.getPoints()[2].getX() +
+                this.getPoints()[2].getZ() * this.getPoints()[0].getX() -
+                this.getPoints()[1].getZ() * this.getPoints()[0].getX() -
+                this.getPoints()[2].getZ() * this.getPoints()[1].getX() -
+                this.getPoints()[0].getZ() * this.getPoints()[2].getX();
+
+        zA = this.getPoints()[0].getX() * this.getPoints()[1].getY() +
+                this.getPoints()[1].getX() * this.getPoints()[2].getY() +
+                this.getPoints()[2].getX() * this.getPoints()[0].getY() -
+                this.getPoints()[1].getX() * this.getPoints()[0].getY() -
+                this.getPoints()[2].getX() * this.getPoints()[1].getY() -
+                this.getPoints()[0].getX() * this.getPoints()[2].getY();
+        Vector vectorA = new Vector(xA, yA, zA);
+        xA = yA = zA = 0;
+        for (int i = 0; i < this.getPoints().length; i++) {
+            xA += this.getPoints()[i].getX();
+            yA += this.getPoints()[i].getY();
+            zA += this.getPoints()[i].getZ();
+        }
+        xA /= this.getPoints().length;
+        yA /= this.getPoints().length;
+        zA /= this.getPoints().length;
+        double xB, yB, zB;
+        xB = viewer.getX() - xA;
+        yB = viewer.getY() - yA;
+        zB = viewer.getZ() - zA;
+        Vector vectorB = new Vector(xB, yB, zB);
+        return Math.toDegrees(Math.acos( vectorA.multiply(vectorB) / vectorA.multiplyLengths(vectorB)));
+    }
 }

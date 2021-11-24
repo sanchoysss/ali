@@ -52,4 +52,10 @@ public class Pyramid {
         Collections.addAll(edges, triangles);
         return edges;
     }
+
+    public void updateEdges(Point viewer) {
+        for (Edge edge : triangles) {
+            edge.updateVisibility(viewer);
+        }
+    }
 }

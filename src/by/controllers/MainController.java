@@ -3,7 +3,9 @@ package by.controllers;
 import by.helpers.MatrixOperations;
 import by.models.Edge;
 import by.models.Parallelepiped;
+import by.models.Point;
 import by.models.Pyramid;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
@@ -36,6 +38,7 @@ public class MainController {
      * Отрисовка фигур
      */
     private void drawFigures() {
+        updateEdges(new Point(0, 0, 5000));
         for (Edge edge : parallelepiped.getRectangles()) {
             drawEdge(edge);
         }
@@ -50,7 +53,7 @@ public class MainController {
     }
 
     /**
-     * Отрисовка граней
+     * Отрисовка грани
      */
     private void drawEdge(Edge edge) {
         double width = 1500;
@@ -283,5 +286,107 @@ public class MainController {
     private void setException(Label exceptionLabel, String message) {
         exceptionLabel.setVisible(true);
         exceptionLabel.setText(message);
+    }
+
+    private void updateEdges(Point viewer) {
+        pyramid.updateEdges(viewer);
+        parallelepiped.updateEdges(viewer);
+    }
+
+    @FXML
+    private Label exceptionOnProjectionsLabel;
+
+    public void drawProfileProjection() {
+        if (pyramid == null || parallelepiped == null) {
+            exceptionOnProjectionsLabel.setText("Фигуры не созданы");
+            exceptionOnProjectionsLabel.setVisible(true);
+            return;
+        }
+        exceptionOnProjectionsLabel.setVisible(false);
+        double[][] matrix = new double[][] {
+                {0, 0, 1, 0},
+                {0, 1, 0, 0},
+                {1, 0, 0, 0},
+                {0, 0, 0, 1}
+        };
+        transformAndThenDraw(matrix);
+    }
+
+    public void drawHorizontalProjection() {
+        if (pyramid == null || parallelepiped == null) {
+            exceptionOnProjectionsLabel.setText("Фигуры не созданы");
+            exceptionOnProjectionsLabel.setVisible(true);
+            return;
+        }
+        exceptionOnProjectionsLabel.setVisible(false);
+        double[][] matrix = new double[][] {
+                {1, 0, 0, 0},
+                {0, 0, 1, 0},
+                {0, 1, 0, 0},
+                {0, 0, 0, 1}
+        };
+        transformAndThenDraw(matrix);
+    }
+
+
+    public void drawAxonometricProjection() {
+    }
+
+    public void drawObliqueProjection() {
+    }
+
+    @FXML
+    private TextField alphaField, phiField, roField, dField;
+
+    @FXML
+    private Label exceptionPerspectiveLabel;
+
+    public void drawPerspectiveProjection() {
+        if (parallelepiped == null || pyramid == null) {
+            exceptionPerspectiveLabel.setText("Фигуры не созданы");
+            exceptionPerspectiveLabel.setVisible(true);
+            return;
+        }
+        try {
+            double alpha = toRadians(Double.parseDouble(alphaField.getText()));
+            double phi = toRadians(Double.parseDouble(phiField.getText()));
+            double ro = Double.parseDouble(roField.getText());
+            double d = Double.parseDouble(dField.getText());
+
+            double[][] matrixV = {
+                    {-sin(alpha), -cos(phi) * (-cos(alpha)), -sin(phi) * cos(alpha), 0},
+                    {cos(phi), -cos(phi) * sin(alpha), -sin(phi) * sin(alpha), 0},
+                    {0, sin(phi), -cos(phi), 0},
+                    {0, 0, ro, 1}
+            };
+
+            double[][] matrixM = {
+                    {1, 0, 0, 0},
+                    {0, 1, 0, 0},
+                    {0, 0, 1, 1d/d},
+                    {0, 0, 0, 0}
+            };
+
+            for (Edge edge : parallelepiped.getEdges()) {
+                for (Point point : edge.getPoints()) {
+                    double[][] pointInMatrix = {point.getCoordinates()};
+                    double[][] result = MatrixOperations.multiplyMatrices(MatrixOperations.multiplyMatrices(pointInMatrix, matrixV), matrixM);
+                    point.setCoordinates(result[0]);
+                }
+            }
+
+            for (Edge edge : pyramid.getEdges()) {
+                for (Point point : edge.getPoints()) {
+                    double[][] pointInMatrix = {point.getCoordinates()};
+                    double[][] result = MatrixOperations.multiplyMatrices(MatrixOperations.multiplyMatrices(pointInMatrix, matrixV), matrixM);
+                    point.setCoordinates(result[0]);
+                }
+            }
+
+            drawFigure();
+        } catch (NumberFormatException e) {
+            exceptionPerspectiveLabel.setText("Данные введены неверно");
+            exceptionPerspectiveLabel.setVisible(true);
+        }
     }
 }

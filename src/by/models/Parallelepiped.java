@@ -67,4 +67,10 @@ public class Parallelepiped {
         Collections.addAll(edges, rectangles);
         return edges;
     }
+
+    public void updateEdges(Point viewer) {
+        for (Edge edge : getEdges()) {
+            edge.updateVisibility(viewer);
+        }
+    }
 }
