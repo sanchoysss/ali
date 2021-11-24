@@ -159,6 +159,38 @@ public class MainController {
         }
     }
 
+    @FXML
+    private TextField scaleXField, scaleYField, scaleZField;
+
+    @FXML
+    private Label exceptionOnScalingLabel;
+
+    @FXML
+    public void scaleFigures() {
+        if (pyramid == null || parallelepiped == null) {
+            exceptionOnScalingLabel.setText("Фигуры не созданы");
+            exceptionOnScalingLabel.setVisible(true);
+            return;
+        }
+        try {
+            double scaleX = Double.parseDouble(scaleXField.getText());
+            double scaleY = Double.parseDouble(scaleYField.getText());
+            double scaleZ = Double.parseDouble(scaleZField.getText());
+            double[][] matrix = {
+                    {scaleX, 0,      0     , 0},
+                    {0     , scaleY, 0     , 0},
+                    {0     , 0     , scaleZ, 0},
+                    {0     , 0     , 0     , 1}
+            };
+            transformAndThenDraw(matrix);
+            exceptionOnScalingLabel.setVisible(false);
+        } catch (NumberFormatException e) {
+            exceptionOnScalingLabel.setText("Данные введены неверно");
+            exceptionOnScalingLabel.setVisible(true);
+        }
+
+    }
+
     private void transformAndThenDraw(double[][] matrix) {
         transformEdges(pyramid.getEdges(), matrix);
         transformEdges(parallelepiped.getEdges(), matrix);
