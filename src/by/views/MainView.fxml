@@ -154,6 +154,84 @@
                     <Insets left="20" right="20"/>
                 </VBox.margin>
             </Button>
+
+            <Label text="Поворот относительно оси X:" prefWidth="420" alignment="BASELINE_CENTER">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="rotateXField" promptText="Введите угол поворота относительно оси Х:" text="0"
+                       prefWidth="400">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionOnRotatingX"
+                   text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red" visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Повернуть" prefWidth="400" alignment="BASELINE_CENTER" onAction="#rotateOnX">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Label text="Поворот относительно оси Y:" prefWidth="420" alignment="BASELINE_CENTER">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="rotateYField" promptText="Введите угол поворота относительно оси Y:" text="0"
+                       prefWidth="400">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionOnRotatingY"
+                   text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red" visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Повернуть" prefWidth="400" alignment="BASELINE_CENTER" onAction="#rotateOnY">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
+
+            <Label text="Поворот относительно оси Z:" prefWidth="420" alignment="BASELINE_CENTER">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="rotateZField" promptText="Введите угол поворота относительно оси Z:" text="0"
+                       prefWidth="400">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionOnRotatingZ"
+                   text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red" visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Повернуть" prefWidth="400" alignment="BASELINE_CENTER" onAction="#rotateOnZ">
+                <VBox.margin>
+                    <Insets top="10" left="20" right="20"/>
+                </VBox.margin>
+            </Button>
         </VBox>
     </ScrollPane>
 </HBox>

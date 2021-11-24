@@ -24,22 +24,22 @@ public class Parallelepiped {
         rectangles[0] = new Edge(
                 triangles[1].getPoints()[0],
                 triangles[1].getPoints()[1],
-                triangles[0].getPoints()[0],
-                triangles[0].getPoints()[1]
+                triangles[0].getPoints()[1],
+                triangles[0].getPoints()[0]
         );
 
         rectangles[1] = new Edge(
                 triangles[1].getPoints()[1],
                 triangles[1].getPoints()[2],
-                triangles[0].getPoints()[1],
-                triangles[0].getPoints()[2]
+                triangles[0].getPoints()[2],
+                triangles[0].getPoints()[1]
         );
 
         rectangles[2] = new Edge(
                 triangles[1].getPoints()[2],
                 triangles[1].getPoints()[0],
-                triangles[0].getPoints()[2],
-                triangles[0].getPoints()[0]
+                triangles[0].getPoints()[0],
+                triangles[0].getPoints()[2]
         );
 
         return new Parallelepiped(triangles, rectangles);

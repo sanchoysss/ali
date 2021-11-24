@@ -15,8 +15,8 @@ public class Triangle {
         double y = radius * sin( toRadians(30) );
 
         Point point1 = new Point(x, y, z);
-        Point point2 = new Point(-x, y, 0);
-        Point point3 = new Point(0, -2 * y, 0);
+        Point point2 = new Point(-x, y, z);
+        Point point3 = new Point(0, -2 * y, z);
 
         return new Edge(point1, point2, point3);
     }
