@@ -55,26 +55,19 @@ public class MainController {
      * Отрисовка грани
      */
     private void drawEdge(Edge edge) {
-        double width = 1500;
-        int height = 1000;
-        double[] startCoordinates, endCoordinates;
-        for (int i = 0; i < edge.getPoints().length; i++) {
-            if (i == edge.getPoints().length - 1 && edge.isVisible()) {
-                startCoordinates = convertingCoordinates(edge.getPoints()[edge.getPoints().length - 1].getX(),
-                        edge.getPoints()[edge.getPoints().length - 1].getY(), width, height);
-                endCoordinates = convertingCoordinates(edge.getPoints()[0].getX(), edge.getPoints()[0].getY(),
-                        width, height);
-                canvas.getGraphicsContext2D().strokeLine(startCoordinates[0], startCoordinates[1],
-                        endCoordinates[0], endCoordinates[1]);
-            } else if (edge.isVisible()) {
-                startCoordinates = convertingCoordinates(edge.getPoints()[i].getX(), edge.getPoints()[i].getY(),
-                        width, height);
-                endCoordinates = convertingCoordinates(edge.getPoints()[i + 1].getX(), edge.getPoints()[i + 1].getY(),
-                        width, height);
-                canvas.getGraphicsContext2D().strokeLine(startCoordinates[0], startCoordinates[1],
-                        endCoordinates[0], endCoordinates[1]);
+        if (edge.isVisible()) {
+            double[] xCoordinates = edge.getXCoordinates();
+            double[] yCoordinates = edge.getYCoordinates();
+
+            for (int i = 0; i < xCoordinates.length; i++) {
+                double[] coordinates = convertingCoordinates(xCoordinates[i], yCoordinates[i], 1500, 1000);
+                xCoordinates[i] = coordinates[0];
+                yCoordinates[i] = coordinates[1];
             }
 
+            //canvas.getGraphicsContext2D().setFill(edge.getColor());
+            canvas.getGraphicsContext2D().strokePolygon(xCoordinates, yCoordinates, xCoordinates.length);
+            //canvas.getGraphicsContext2D().fillPolygon(xCoordinates, yCoordinates, xCoordinates.length);
         }
     }
 

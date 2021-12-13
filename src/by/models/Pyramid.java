@@ -54,8 +54,11 @@ public class Pyramid {
     }
 
     public void updateEdges(Point viewer) {
-        for (Edge edge : triangles) {
-            edge.updateVisibility(viewer);
+        for (int i = 0; i < triangles.length; i++) {
+            this.triangles[i].updateVisibility(viewer);
+            if (i == 0) {
+                this.triangles[i].setVisible(!this.triangles[i].isVisible());
+            }
         }
     }
 }

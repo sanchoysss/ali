@@ -51,9 +51,25 @@ public class Edge {
         return visible;
     }
 
+    public double[] getXCoordinates() {
+        double[] xCoordinates = new double[this.points.length];
+        for (int i = 0; i < this.points.length; i++) {
+            xCoordinates[i] = this.points[i].getX();
+        }
+        return xCoordinates;
+    }
+
+    public double[] getYCoordinates() {
+        double[] yCoordinates = new double[this.points.length];
+        for (int i = 0; i < this.points.length; i++) {
+            yCoordinates[i] = this.points[i].getY();
+        }
+        return yCoordinates;
+    }
+
     public void updateVisibility(Point viewer) {
-//        double angle = calculateAngle(viewer);
-//        this.visible = angle <= 90;
+        double angle = calculateAngle(viewer);
+        this.visible = angle < 90;
     }
 
     private double calculateAngle(Point viewer) {

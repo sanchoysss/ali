@@ -69,8 +69,15 @@ public class Parallelepiped {
     }
 
     public void updateEdges(Point viewer) {
-        for (Edge edge : getEdges()) {
-            edge.updateVisibility(viewer);
+        for (int i = 0; i < triangles.length; i++) {
+            triangles[i].updateVisibility(viewer);
+            if (i == 1) {
+                triangles[i].setVisible(!triangles[i].isVisible());
+            }
+        }
+
+        for (Edge rectangle : rectangles) {
+            rectangle.updateVisibility(viewer);
         }
     }
 }
