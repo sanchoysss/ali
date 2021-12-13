@@ -403,6 +403,60 @@
                     <Insets top="10" left="20" right="20"/>
                 </VBox.margin>
             </Button>
+
+            <Label text="Источник цвета" alignment="BASELINE_CENTER" prefWidth="420">
+
+            </Label>
+
+            <Label text="Координата X:">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="lightX" promptText="Введите координату X:" text="0">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Координата Y:">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="lightY" promptText="Введите координату Y:" text="0">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Координата Z:">
+                <VBox.margin>
+                    <Insets top="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="lightZ" promptText="Введите координату Z:" text="0">
+                <VBox.margin>
+                    <Insets top="10" bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionOnLightLabel"
+                   text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red" visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Button text="Изменить источник света" prefWidth="400" alignment="BASELINE_CENTER"
+                    onAction="#setLight">
+                <VBox.margin>
+                    <Insets left="20" right="20"/>
+                </VBox.margin>
+            </Button>
         </VBox>
     </ScrollPane>
 </HBox>

@@ -6,17 +6,20 @@ import by.models.Parallelepiped;
 import by.models.Point;
 import by.models.Pyramid;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static java.lang.Math.sin;
 import static java.lang.Math.cos;
 import static java.lang.Math.toRadians;
 
-public class MainController {
+public class MainController implements Initializable {
 
     @FXML
     private Canvas canvas;
@@ -33,20 +36,36 @@ public class MainController {
     Parallelepiped parallelepiped;
     Pyramid pyramid;
 
+    @FXML
+    private Point light;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        light = new Point(0, 0, 5000);
+    }
+
     /**
      * Отрисовка фигур
      */
     private void drawFigures() {
         updateEdges(new Point(0, 0, 5000));
-        for (Edge edge : parallelepiped.getRectangles()) {
-            drawEdge(edge);
+        if (parallelepiped.getClosestPoint().getZ() > pyramid.getClosestPoint().getZ()) {
+            drawParallelepiped();
+            drawPyramid();
+        } else {
+            drawPyramid();
+            drawParallelepiped();
         }
+    }
 
-        for (Edge edge : parallelepiped.getTriangles()) {
-            drawEdge(edge);
-        }
-
+    public void drawPyramid() {
         for (Edge edge : pyramid.getTriangles()) {
+            drawEdge(edge);
+        }
+    }
+
+    public void drawParallelepiped() {
+        for (Edge edge : parallelepiped.getEdges()) {
             drawEdge(edge);
         }
     }
@@ -65,9 +84,9 @@ public class MainController {
                 yCoordinates[i] = coordinates[1];
             }
 
-            //canvas.getGraphicsContext2D().setFill(edge.getColor());
-            canvas.getGraphicsContext2D().strokePolygon(xCoordinates, yCoordinates, xCoordinates.length);
-            //canvas.getGraphicsContext2D().fillPolygon(xCoordinates, yCoordinates, xCoordinates.length);
+            canvas.getGraphicsContext2D().setFill(edge.getColor());
+            //canvas.getGraphicsContext2D().strokePolygon(xCoordinates, yCoordinates, xCoordinates.length);
+            canvas.getGraphicsContext2D().fillPolygon(xCoordinates, yCoordinates, xCoordinates.length);
         }
     }
 
@@ -296,8 +315,8 @@ public class MainController {
     }
 
     private void updateEdges(Point viewer) {
-        pyramid.updateEdges(viewer);
-        parallelepiped.updateEdges(viewer);
+        pyramid.updateEdges(viewer, light);
+        parallelepiped.updateEdges(viewer, light);
     }
 
     @FXML
@@ -403,6 +422,34 @@ public class MainController {
         } catch (NumberFormatException e) {
             exceptionPerspectiveLabel.setText("Данные введены неверно");
             exceptionPerspectiveLabel.setVisible(true);
+        }
+    }
+
+    @FXML
+    TextField lightX, lightY, lightZ;
+
+    @FXML
+    Label exceptionOnLightLabel;
+
+    public void setLight() {
+        double lightX, lightY, lightZ;
+        try {
+            lightX = Double.parseDouble(this.lightX.getText());
+            lightY = Double.parseDouble(this.lightY.getText());
+            lightZ = Double.parseDouble(this.lightZ.getText());
+
+            exceptionOnLightLabel.setVisible(false);
+
+            this.lightX.setText("");
+            this.lightY.setText("");
+            this.lightZ.setText("");
+
+            light = new Point(lightX, lightY, lightZ);
+            drawFigures();
+        } catch (NumberFormatException e) {
+            exceptionOnLightLabel.setVisible(true);
+            exceptionOnLightLabel.setText("Данные введены неверно");
+
         }
     }
 }

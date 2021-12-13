@@ -1,5 +1,8 @@
 package by.models;
 
+import java.awt.*;
+import javafx.scene.paint.Color;
+
 /**
  * Данный класс представляет собой грань
  */
@@ -7,6 +10,7 @@ public class Edge {
 
     private Point[] points;
     private boolean visible;
+    private Color color;
 
     /**
      * Конструктор, который принимает на вход массив точек, чтобы создать грань
@@ -18,6 +22,7 @@ public class Edge {
             this.points[i] = new Point(points[i]);
         }
         visible = true;
+        color = new Color(0, 0, 0, 1);
     }
 
     /**
@@ -72,7 +77,14 @@ public class Edge {
         this.visible = angle < 90;
     }
 
-    private double calculateAngle(Point viewer) {
+    public void updateColor(Point light) {
+        double angle = calculateAngle(light);
+        double green = 1 - (50 + 205 * (angle / 180d)) / 255;
+        if (green < 0.2) green = 0.2;
+        this.color = new Color(0, green, 0, 1);
+    }
+
+    public double calculateAngle(Point viewer) {
         double xA, yA, zA;
         xA = this.getPoints()[0].getY() * this.getPoints()[1].getZ() +
                 this.getPoints()[1].getY() * this.getPoints()[2].getZ() +
@@ -109,5 +121,13 @@ public class Edge {
         zB = viewer.getZ() - zA;
         Vector vectorB = new Vector(xB, yB, zB);
         return Math.toDegrees(Math.acos( vectorA.multiply(vectorB) / vectorA.multiplyLengths(vectorB)));
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

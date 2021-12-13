@@ -16,6 +16,7 @@ public class Pyramid {
         Edge[] triangles = new Edge[4];
 
         triangles[0] = Triangle.createTriangle(side, 0);
+        triangles[0].setVisible(false);
 
 
         triangles[1] = new Edge(
@@ -53,12 +54,22 @@ public class Pyramid {
         return edges;
     }
 
-    public void updateEdges(Point viewer) {
-        for (int i = 0; i < triangles.length; i++) {
+    public void updateEdges(Point viewer, Point light) {
+        for (int i = 1; i < triangles.length; i++) {
             this.triangles[i].updateVisibility(viewer);
-            if (i == 0) {
-                this.triangles[i].setVisible(!this.triangles[i].isVisible());
+            this.triangles[i].updateColor(light);
+        }
+    }
+
+    public Point getClosestPoint() {
+        Point closestPoint = triangles[0].getPoints()[0];
+        for (Edge edge : triangles) {
+            for (Point point : edge.getPoints()) {
+                if (point.getZ() > closestPoint.getZ()) {
+                    closestPoint = point;
+                }
             }
         }
+        return closestPoint;
     }
 }
