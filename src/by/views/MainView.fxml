@@ -390,12 +390,86 @@
                 </VBox.margin>
             </Button>
 
+            <Label text="Аксонометрическая проекция">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Label text="Угол фи">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="phiAxonometricField" promptText="Введите угол фи:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Пси">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="psiField" promptText="Введите psi:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionAxonometricLabel" text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red"
+                   visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
             <Button prefWidth="380" text="Аксонометрическая проекция"
                     alignment="BASELINE_CENTER" onAction="#drawAxonometricProjection">
                 <VBox.margin>
                     <Insets top="10" left="20" right="20"/>
                 </VBox.margin>
             </Button>
+
+            <Label text="Косоугольная проекция">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
+
+            <Label text="Угол а">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="aField" promptText="Введите угол a:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label text="Параметр l">
+                <VBox.margin>
+                    <Insets bottom="10" left="20"/>
+                </VBox.margin>
+            </Label>
+
+            <TextField fx:id="lField" promptText="Введите l:">
+                <VBox.margin>
+                    <Insets bottom="20" left="20" right="20"/>
+                </VBox.margin>
+            </TextField>
+
+            <Label fx:id="exceptionObliqueLabel" text="Exception" prefWidth="390" alignment="BASELINE_CENTER" textFill="red"
+                   visible="false">
+                <VBox.margin>
+                    <Insets bottom="10" left="20" right="20"/>
+                </VBox.margin>
+            </Label>
 
             <Button prefWidth="380" text="Косоугольная проекция"
                     alignment="BASELINE_CENTER" onAction="#drawObliqueProjection">

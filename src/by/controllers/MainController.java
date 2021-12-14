@@ -360,13 +360,6 @@ public class MainController implements Initializable {
         transformAndThenDraw(matrix);
     }
 
-
-    public void drawAxonometricProjection() {
-    }
-
-    public void drawObliqueProjection() {
-    }
-
     @FXML
     private TextField alphaField, phiField, roField, dField;
 
@@ -452,4 +445,63 @@ public class MainController implements Initializable {
 
         }
     }
+
+    @FXML
+    TextField phiAxonometricField, psiField;
+
+    @FXML
+    Label exceptionAxonometricLabel;
+
+    public void drawAxonometricProjection() {
+        if (pyramid == null || parallelepiped == null) {
+            exceptionAxonometricLabel.setText("Фигуры не созданы");
+            exceptionAxonometricLabel.setVisible(true);
+            return;
+        }
+        exceptionAxonometricLabel.setVisible(false);
+        try {
+            double phi = toRadians(Double.parseDouble(phiAxonometricField.getText()));
+            double psi = toRadians(Double.parseDouble(psiField.getText()));
+            double[][] matrix = new double[][] {
+                    {cos(psi), sin(phi) * sin(psi),  0, 0},
+                    {0,        cos(phi),             0, 0},
+                    {sin(psi), -sin(phi) * cos(psi), 0, 0},
+                    {0,        0,                    0, 1}
+            };
+            transformAndThenDraw(matrix);
+        } catch (NumberFormatException e) {
+            exceptionAxonometricLabel.setText("Данные введены неверно");
+            exceptionAxonometricLabel.setVisible(true);
+        }
+    }
+
+    @FXML
+    TextField aField, lField;
+
+    @FXML
+    Label exceptionObliqueLabel;
+
+    public void drawObliqueProjection() {
+        if (pyramid == null || parallelepiped == null) {
+            exceptionObliqueLabel.setText("Фигуры не созданы");
+            exceptionObliqueLabel.setVisible(true);
+            return;
+        }
+        exceptionObliqueLabel.setVisible(false);
+        try {
+            double a = toRadians(Double.parseDouble(aField.getText()));
+            double l = Double.parseDouble(lField.getText());
+            double[][] matrix = new double[][] {
+                    {1,          0,          0, 0},
+                    {0,          1,          0, 0},
+                    {l * cos(a), l * sin(a), 0, 0},
+                    {0,           0,         0, 1}
+            };
+            transformAndThenDraw(matrix);
+        } catch (NumberFormatException e) {
+            exceptionObliqueLabel.setText("Данные введены неверно");
+            exceptionObliqueLabel.setVisible(true);
+        }
+    }
+
 }
